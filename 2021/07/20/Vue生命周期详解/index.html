@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="生命周期,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vue 的实例  1234567891011const vm = new Vue (&amp;#123;  el:&apos;#app&apos;,  data: &amp;#123;    message:&apos;Hello, LifeCycle!&apos;  &amp;#125;,  methods: &amp;#123;    init() &amp;#123;      console.log(&apos;这是一个方法!&apos;)    &amp;#125;  &amp;#125;&amp;#125;">
+<meta name="keywords" content="生命周期">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue生命周期详解">
+<meta property="og:url" content="http://abbyyecp.com/2021/07/20/Vue生命周期详解/index.html">
+<meta property="og:site_name" content="AbbyYeCp&#39;s blog">
+<meta property="og:description" content="Vue 的实例  1234567891011const vm = new Vue (&amp;#123;  el:&apos;#app&apos;,  data: &amp;#123;    message:&apos;Hello, LifeCycle!&apos;  &amp;#125;,  methods: &amp;#123;    init() &amp;#123;      console.log(&apos;这是一个方法!&apos;)    &amp;#125;  &amp;#125;&amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsnf05knazj312k0kyacq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsngr4rpb8j312s0krjuh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsni0r53baj312q0lnae6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsnjc1mmblj312k0o9n30.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsnjgl7okdj311g0ldn30.jpg">
+<meta property="og:updated_time" content="2021-07-21T09:09:12.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue生命周期详解">
+<meta name="twitter:description" content="Vue 的实例  1234567891011const vm = new Vue (&amp;#123;  el:&apos;#app&apos;,  data: &amp;#123;    message:&apos;Hello, LifeCycle!&apos;  &amp;#125;,  methods: &amp;#123;    init() &amp;#123;      console.log(&apos;这是一个方法!&apos;)    &amp;#125;  &amp;#125;&amp;#125;">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsnf05knazj312k0kyacq.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://abbyyecp.com/2021/07/20/Vue生命周期详解/">
+
+
+
+
+
+  <title>Vue生命周期详解 | AbbyYeCp's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AbbyYeCp's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life and Death are Wearing Me Out</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://abbyyecp.com/2021/07/20/Vue生命周期详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AbbyYeCp">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gcy8728tmej30oq0osakf.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AbbyYeCp's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue生命周期详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-20T19:02:06+08:00">
+                2021-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Vue-的实例"><a href="#Vue-的实例" class="headerlink" title="Vue 的实例"></a>Vue 的实例</h2>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message:<span class="string">'Hello, LifeCycle!'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是一个方法!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>  <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsnf05knazj312k0kyacq.jpg" width="100%" style="margin:0;"><br>  <a id="more"></a></p>
+<ul>
+<li><p>每个 Vue 应用都是通过 Vue 函数创建一个新的 Vue 实例开始的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// 选项 </span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>vue.js就是一个构造器，通过构造器Vue来实例化一个对象，例如：const vm = new Vue({})</li>
+<li>实例化Vue时，需要传入一个参数（选项对象）</li>
+<li>参数：选项对象可以包含 挂载元素(el)、数据(data)、方法(methods)、模版(template)、生命周期函数等</li>
+<li>扩展构造器Vue，从而用预定义选项创建可复用的组件构造器，所有组件都是被扩展的Vue的实例，使用Vue.extend({})来扩展</li>
+</ol>
+<p><em>Tips：尽管可以命令式地创建扩展实例，不过在多数情况下建议将组件构造器注册为一个自定义元素，然后声明式地用在模板中</em></p>
+</li>
+</ul>
+<h2 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h2><h3 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate"></a>beforeCreate</h3><ul>
+<li><p>beforeCreate 在 Vue 实例初始化之后要执行的第一个生命周期函数, 此时无法访问到 el 属性和 data 属性等。<br><em>数据观测 (data observer) 和 event/watcher 事件配置之前被调用</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message:<span class="string">'Hello, LifeCycle!'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是一个方法!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeCreate() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)   <span class="comment">// undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>) <span class="comment">// undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)   <span class="comment">// undefined</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsngr4rpb8j312s0krjuh.jpg" width="100%" style="margin:0;"></p>
+</li>
+</ul>
+<h3 id="created"><a href="#created" class="headerlink" title="created"></a>created</h3><ul>
+<li><p>created 代表实例已经创建完成，但是还没有挂载，所以除了 $el 之外，其他都是可以获取到的。<br><em>在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，property 和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，$el property 目前尚不可用。</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message:<span class="string">'Hello, LifeCycle!'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是一个方法!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeCreate() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsni0r53baj312q0lnae6.jpg" width="100%" style="margin:0;"></p>
+</li>
+</ul>
+<h3 id="beforeMount"><a href="#beforeMount" class="headerlink" title="beforeMount"></a>beforeMount</h3><ul>
+<li><p>beforeMount 在挂载之前被调用，相关的 render 函数首次被调用，此时模板已经编译好了，但是还存放在内存中，没有正式挂载到页面上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message:<span class="string">'Hello, LifeCycle!'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是一个方法!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeCreate() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeMount() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'beforeMount this.$el:'</span>, <span class="keyword">this</span>.$el) <span class="comment">// 此时的el还未对数据进行渲染.(虚拟dom的内容)</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsnjc1mmblj312k0o9n30.jpg" width="100%" style="margin:0;"></p>
+</li>
+</ul>
+<h3 id="mounted"><a href="#mounted" class="headerlink" title="mounted"></a>mounted</h3><ul>
+<li><p>在 $el 挂载完毕后会调用 mounted 方法，页面上生成了真正的 DOM，这里我们就可以进行 DOM 进行操作了。<br><em>Tips: mounted 只能保证当前的组件已经挂载完毕，而不能保证其所有子组件也都挂载完毕</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message:<span class="string">'Hello, LifeCycle!'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是一个方法!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeCreate() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeMount() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'beforeMount this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mounted this.$el:'</span>, <span class="keyword">this</span>.$el) <span class="comment">// 已将数据渲染到真实dom</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsnjgl7okdj311g0ldn30.jpg" width="100%" style="margin:0;"></p>
+</li>
+</ul>
+<h3 id="beforeUpdate"><a href="#beforeUpdate" class="headerlink" title="beforeUpdate"></a>beforeUpdate</h3><ul>
+<li><p>在 Mounted 的过程中，如果 data 对象的数据发生了改变，就会执行beforeUpdate这个生命周期函数，一般在这里访问 DOM 比较合适<br><em>Tips: 这里所说的数据更新，是指新值和旧值不相等</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message:<span class="string">'Hello, LifeCycle!'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是一个方法!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeCreate() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeCreate 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`created 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeMount() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'beforeMount this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeMount 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">this</span>.message = <span class="string">'Hello world !'</span> <span class="comment">// 在 mounted 之前的生命周期函数中改变 data 数据也是不会触发 beforeUpdate 的，换言之，只有真正改变了渲染到页面上的数据才会触发该生命周期函数</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mounted this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">    <span class="comment">// this.message = 'Hello world !'</span></span><br><span class="line">    <span class="keyword">this</span>.testMessage = <span class="string">"I'm a little bit confused about..."</span> <span class="comment">// 没有在 data 上初始化的数据不会被动态观测，所以同样不会触发</span></span><br><span class="line">  &#125;,</span><br><span class="line">  beforeUpdate() &#123;  <span class="comment">// 不会触发</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'beforeUpdate this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate testMessage：<span class="subst">$&#123;<span class="keyword">this</span>.testMessage&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>没有触发beforeUpdate的原因：</p>
+</li>
+<li>vue 的 observer 检测到新值和旧值是一样的 (message值没有改变)，所以不会触发</li>
+<li>没有在 data 上初始化的数据不会被动态观测 (testMessage)，所以同样不会触发</li>
+<li><p>在 mounted 之前的生命周期函数中改变 data 数据也是不会触发 beforeUpdate 的，换言之，只有真正改变了渲染到页面上的数据才会触发该生命周期函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message:<span class="string">'Hello, LifeCycle!'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是一个方法!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mounted this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">this</span>.message = <span class="string">'Hello world !'</span> <span class="comment">// message值改变</span></span><br><span class="line">  &#125;,</span><br><span class="line">  beforeUpdate() &#123;  <span class="comment">// 触发</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'beforeUpdate this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="updated"><a href="#updated" class="headerlink" title="updated"></a>updated</h3><ul>
+<li><p>由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。<br>当updated被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。<br>注意 updated 不会保证所有的子组件也都一起被重绘。如果你希望等到整个视图都重绘完毕，可以在 updated 里使用 vm.$nextTick</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue (&#123;</span><br><span class="line">  el:<span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message:<span class="string">'Hello, LifeCycle!'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是一个方法!'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mounted this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`mounted 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">this</span>.message = <span class="string">'Hello world !'</span> <span class="comment">// message值改变</span></span><br><span class="line">  &#125;,</span><br><span class="line">  beforeUpdate() &#123; <span class="comment">// 触发</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'beforeUpdate this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`beforeUpdate 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  updated() &#123; <span class="comment">// 触发</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`updated 元素：<span class="subst">$&#123;<span class="keyword">this</span>.$el&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'updated this.$el:'</span>, <span class="keyword">this</span>.$el)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`updated 属性message：<span class="subst">$&#123;<span class="keyword">this</span>.message&#125;</span>`</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`updated 方法init：<span class="subst">$&#123;<span class="keyword">this</span>.init&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><em>Tips: 只有执行了 beforeUpdate 方法才会执行 updated 方法，也就是说触发 updated 之前必须满足触发 beforeUpdate 的条件</em></p>
+</li>
+</ul>
+<h3 id="activated"><a href="#activated" class="headerlink" title="activated"></a>activated</h3><ul>
+<li>被 keep-alive 缓存的组件激活时调用。</li>
+</ul>
+<h3 id="deactivated"><a href="#deactivated" class="headerlink" title="deactivated"></a>deactivated</h3><ul>
+<li>被 keep-alive 缓存的组件停用时调用。</li>
+</ul>
+<h3 id="beforeDestroy"><a href="#beforeDestroy" class="headerlink" title="beforeDestroy"></a>beforeDestroy</h3><ul>
+<li>实例销毁之前调用。这一步，在这个函数中依然可以获取实例中的属性。<br><em>Tips：当用户离开页面或跳转页面的时候会触发，如果使用了 keep-alive 对组件进行了缓存，就不会触发。</em></li>
+</ul>
+<h3 id="destroyed"><a href="#destroyed" class="headerlink" title="destroyed"></a>destroyed</h3><ul>
+<li>实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁（destroyed 用于销毁 Vue 实例，同时实例上绑定的事件，数据都会被移除，包括子组件，可以在这个函数内清除先前定义的计时器）。</li>
+</ul>
+<h3 id="errorCaptured"><a href="#errorCaptured" class="headerlink" title="errorCaptured"></a>errorCaptured</h3><ul>
+<li>当捕获一个来自子孙组件的错误时被调用。此钩子会收到三个参数：错误对象、发生错误的组件实例以及一个包含错误来源信息的字符串。此钩子可以返回 false 以阻止该错误继续向上传播。<br><em>Tips：你可以在此钩子中修改组件的状态。因此在捕获错误时，在模板或渲染函数中有一个条件判断来绕过其它内容就很重要；不然该组件可能会进入一个无限的渲染循环。</em></li>
+</ul>
+<h2 id="Vue-nextTick"><a href="#Vue-nextTick" class="headerlink" title="Vue.nextTick"></a>Vue.nextTick</h2><ul>
+<li><p>将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。它跟全局方法 Vue.nextTick 一样，不同的是回调的 this 自动绑定到调用它的实例上。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3></li>
+</ul>
+<ol>
+<li><p>在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick()的回调函数中。原因是什么呢？原因是在created()钩子函数执行的时候DOM 其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以此处一定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。与之对应的就是mounted钩子函数，因为该钩子函数执行时所有的DOM挂载和渲染都已完成，此时在该钩子函数中进行任何DOM操作都不会有问题 。</p>
+</li>
+<li><p>在数据变化后要执行的某个操作，当你设置 vm.someData = ‘new value’，DOM并不会马上更新，而是在异步队列被清除，也就是下一个事件循环开始时执行更新时才会进行必要的DOM更新。如果此时你想要根据更新的 DOM 状态去做某些事情，就会出现问题。为了在数据变化之后等待 Vue 完成更新 DOM ，可以在数据变化之后立即使用 Vue.nextTick(callback) 。这样回调函数在 DOM 更新完成后就会调用。 </p>
+</li>
+<li><p>beforeCreate 时，data、watch、computed 这些属性都还没有初始化，不能被操作，如果想要在这里对属性进行一些操作，可以使用 this.$nextTick。</p>
+</li>
+<li><p>mounted 只能保证当前的组件已经挂载完毕，而不能保证其所有子组件也都挂载完毕，如果想要在这里对子组件进行一些操作，可以使用 this.$nextTick。</p>
+</li>
+<li><p>updated 同 mounted。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="AbbyYeCp 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="AbbyYeCp 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/生命周期/" rel="tag"># 生命周期</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/25/JavaScript中的同步与异步/" rel="next" title="JavaScript中的同步与异步">
+                <i class="fa fa-chevron-left"></i> JavaScript中的同步与异步
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://tva1.sinaimg.cn/large/00831rSTgy1gcy8728tmej30oq0osakf.jpg" alt="AbbyYeCp">
+            
+              <p class="site-author-name" itemprop="name">AbbyYeCp</p>
+              <p class="site-description motion-element" itemprop="description">这些年来，她东奔西走，无人伴她以歌，无人伴她以酒，到最后，竟也无人伴她共白头。<br> ——夏七夕 《飞过有你的城市》</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/AbbyXYecp" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:abbyxyecp@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="//cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
+  <script>
+      var gitalk = new Gitalk({
+        clientID: 'b327f84bfaa4514ffd4f',
+        clientSecret: '314224abe617337c55473f368397e366d483fd62',
+        repo: 'AbbyXYeCp.github.io',
+        owner: 'AbbyXYecp',
+        admin: 'AbbyXYecp',
+        id: md5(location.pathname),
+        distractionFreeMode: 'true'
+      });
+      var div = document.createElement('div');
+      div.setAttribute("id", "gitalk_comments");
+      div.setAttribute("class", "post-nav");
+      var bro = document.getElementById('posts').getElementsByTagName('article');
+      bro = bro[0].getElementsByClassName('post-block');
+      bro = bro[0].getElementsByTagName('footer');
+      bro = bro[0];
+      bro.appendChild(div);
+      gitalk.render('gitalk_comments');
+  </script>
+  
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-的实例"><span class="nav-number">1.</span> <span class="nav-text">Vue 的实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期函数"><span class="nav-number">2.</span> <span class="nav-text">生命周期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeCreate"><span class="nav-number">2.1.</span> <span class="nav-text">beforeCreate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#created"><span class="nav-number">2.2.</span> <span class="nav-text">created</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeMount"><span class="nav-number">2.3.</span> <span class="nav-text">beforeMount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mounted"><span class="nav-number">2.4.</span> <span class="nav-text">mounted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeUpdate"><span class="nav-number">2.5.</span> <span class="nav-text">beforeUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#updated"><span class="nav-number">2.6.</span> <span class="nav-text">updated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activated"><span class="nav-number">2.7.</span> <span class="nav-text">activated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deactivated"><span class="nav-number">2.8.</span> <span class="nav-text">deactivated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeDestroy"><span class="nav-number">2.9.</span> <span class="nav-text">beforeDestroy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#destroyed"><span class="nav-number">2.10.</span> <span class="nav-text">destroyed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errorCaptured"><span class="nav-number">2.11.</span> <span class="nav-text">errorCaptured</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-nextTick"><span class="nav-number">3.</span> <span class="nav-text">Vue.nextTick</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">3.1.</span> <span class="nav-text">应用场景</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+      
+      <!--背景音乐-->
+      <!-- <link rel="stylesheet" href="/dist/APlayer.min.css">
+      <div id="aplayer"></div>
+      <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+      <script type="text/javascript" src="/dist/music.js"></script> -->
+
+      <!-- 粒子时钟 -->
+      <!--<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>-->
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AbbyYeCp</span>
+
+  
+</div>
+
+
+  <div class="powered-by"></div>
+
+
+
+  <span class="post-meta-divider"></span>
+
+
+
+  <div class="theme-info">
+  
+  </div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script type="text/javascript" color="82,138,93" opacity="0.6" zindex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+
+  <script type="text/javascript">
+  /* 鼠标特效 */
+  var a_idx = 0;
+  jQuery(document).ready(function($) {
+    $("body").click(function(e) {
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+        var $i = $("<span/>").text(a[a_idx]);
+        a_idx = (a_idx + 1) % a.length;
+        var x = e.pageX,
+        y = e.pageY;
+        $i.css({
+            "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": "#ff6651"
+        });
+        $("body").append($i);
+        $i.animate({
+            "top": y - 180,
+            "opacity": 0
+        },
+        1500,
+        function() {
+            $i.remove();
+        });
+    });
+  });
+  </script>
+
+  <!-- <script type="text/javascript">
+    /*hone-hone-clock*/
+    !function (e, t, a) { 
+      /* code */
+      var initClock = function(){
+        var sHtml = '';
+        sHtml += '<div style="position: fixed;right: 10px;top: 20px;width: 160px;height: 70px;">';
+        sHtml += '  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="160" height="70" id="honehoneclock" align="middle">';
+        sHtml += '    <param name="allowScriptAccess" value="always">';
+        sHtml += '    <param name="movie" value="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf">';
+        sHtml += '    <param name="quality" value="high">';
+        sHtml += '    <param name="bgcolor" value="#ffffff">';
+        sHtml += '    <param name="wmode" value="transparent">';
+        sHtml += '    <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#ffffff" width="160" height="70" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">';
+        sHtml += '    </object>';
+        sHtml += '</div>';
+        
+        t = t || document;
+        t.write(sHtml);
+      }
+      initClock();
+    }(window, document);
+  </script> -->
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":180},"mobile":{"show":true},"opacityDefault":0.2,"react":{"opacityDefault":1,"opacityOnHover":0.2},"log":false});</script></body>
+</html>
